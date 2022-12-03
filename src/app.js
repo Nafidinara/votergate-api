@@ -58,10 +58,17 @@ if (config.env === 'production') {
   app.use('/votergate/api/v1/auth', authLimiter);
 }
 
-app.get('/votergate/api/v1', (req,res) => {
+app.get('/votergate/api/v1', (req, res) => {
   return res.status(httpStatus.OK).send({
-    status : 'OK',
-    msg : 'Welcome to Guru Bintang API, by Hashira dev'
+    status: 'OK',
+    msg: 'Welcome to VoterGate API, by distancing reborn',
+  });
+});
+
+app.get('/', (req, res) => {
+  return res.status(httpStatus.OK).send({
+    status: 'OK',
+    msg: 'Welcome to VoterGate API, by distancing reborn',
   });
 });
 
