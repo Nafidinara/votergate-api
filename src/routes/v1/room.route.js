@@ -11,15 +11,11 @@ router
   .post(auth, validate(roomValidation.createRoom), roomController.createRoom)
   .get(auth, validate(roomValidation.getRooms), roomController.getRooms);
 
-router.route('/search').post(validate(roomValidation.getSearchRoom), roomController.getSearchRoom);
-
-router.route('/image/:roomId').get(validate(roomValidation.getImageRoom), roomController.getImageRoom);
-
 router
   .route('/:roomId')
-  .get(validate(roomValidation.getRoom), roomController.getRoom)
-  .put(validate(roomValidation.updateRoom), roomController.updateRoom)
-  .delete(validate(roomValidation.deleteRoom), roomController.deleteRoom);
+  .get(auth, validate(roomValidation.getRoom), roomController.getRoom)
+  .put(auth, validate(roomValidation.updateRoom), roomController.updateRoom)
+  .delete(auth, validate(roomValidation.deleteRoom), roomController.deleteRoom);
 
 module.exports = router;
 
