@@ -1,6 +1,6 @@
 version: '3'
 
 services:
-  api-guru-bintang:
-    container_name: api-guru-bintang
+  api-votergate:
+    container_name: api-votergate
     command: yarn start

@@ -1,14 +1,14 @@
 version: '3'
 
 services:
-  mongo-guru-bintang:
-    container_name: mongo-guru-bintang
+  mongo-votergate:
+    container_name: mongo-votergate
     image: mongo:latest
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: mongomin
       MONGO_INITDB_ROOT_PASSWORD: VRKSMGPEE8ahxgM4
-      MONGO_INITDB_DATABASE: api-guru-bintang
+      MONGO_INITDB_DATABASE: api-votergate
     ports:
       - '10105:27017'
     volumes:
@@ -17,17 +17,17 @@ services:
     networks:
       - node-network
 
-  api-guru-bintang:
-    container_name: api-guru-bintang
+  api-votergate:
+    container_name: api-votergate
     build: .
     environment:
-      - MONGODB_URL=mongodb://mongomin:VRKSMGPEE8ahxgM4@mongo-guru-bintang:27017/api-guru-bintang
+      - MONGODB_URL=mongodb://mongomin:VRKSMGPEE8ahxgM4@mongo-votergate:27017/api-votergate
     ports:
       - 10104:8078
     depends_on:
-      - mongo-guru-bintang
+      - mongo-votergate
     volumes:
-      - .:/usr/src/api-guru-bintang
+      - .:/usr/src/api-votergate
     networks:
       - node-network
 

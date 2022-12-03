@@ -1,10 +1,10 @@
 {
-  "name": "guru-bintang-rest-api",
+  "name": "votergate-rest-api",
   "version": "1.0.0",
-  "description": "guru-bintang rest API",
+  "description": "votergate rest API",
   "main": "src/index.js",
   "repository": "",
-  "author": "Hashira",
+  "author": "distancing reborn",
   "license": "MIT",
   "engines": {
     "node": ">=12.0.0"
@@ -68,7 +68,7 @@
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "mongoose": "^5.7.7",
+    "mongoose": "^6.6.7",
     "mongoose-seed": "^0.6.0",
     "morgan": "^1.9.1",
     "multer": "^1.4.4",

@@ -1,8 +1,8 @@
 FROM node:alpine
 
-RUN mkdir -p /usr/src/api-guru-bintang && chown -R node:node /usr/src/api-guru-bintang
+RUN mkdir -p /usr/src/api-votergate && chown -R node:node /usr/src/api-votergate
 
-WORKDIR /usr/src/api-guru-bintang
+WORKDIR /usr/src/api-votergate
 
 COPY package.json yarn.lock ./
 
