@@ -1,0 +1,39 @@
+version: '3'
+
+services:
+  mongo-guru-bintang:
+    container_name: mongo-guru-bintang
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongomin
+      MONGO_INITDB_ROOT_PASSWORD: VRKSMGPEE8ahxgM4
+      MONGO_INITDB_DATABASE: api-guru-bintang
+    ports:
+      - '10105:27017'
+    volumes:
+      - dbdata:/data/db
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
+    networks:
+      - node-network
+
+  api-guru-bintang:
+    container_name: api-guru-bintang
+    build: .
+    environment:
+      - MONGODB_URL=mongodb://mongomin:VRKSMGPEE8ahxgM4@mongo-guru-bintang:27017/api-guru-bintang
+    ports:
+      - 10104:8078
+    depends_on:
+      - mongo-guru-bintang
+    volumes:
+      - .:/usr/src/api-guru-bintang
+    networks:
+      - node-network
+
+volumes:
+  dbdata:
+
+networks:
+  node-network:
+    driver: bridge

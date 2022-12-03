@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  api-guru-bintang:
+    container_name: api-guru-bintang
+    command: yarn start
