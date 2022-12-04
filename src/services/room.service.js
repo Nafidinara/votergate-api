@@ -67,19 +67,9 @@ const getImageRoom = async (roomId) => {
  * @returns {Promise<Room>}
  */
 const updateRoomById = async (roomId, updateBody) => {
-  const result = { ...updateBody };
   const roomModel = await Room.findOne({ _id: roomId });
   if (!roomModel) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Room not found');
-  }
-  if (result.image) {
-    const img = result.image;
-    result.image = img.path;
-    if (roomModel.image) {
-      unlink(roomModel.image, (err) => {
-        if (err) throw new ApiError(httpStatus.NOT_FOUND, 'File not found');
-      });
-    }
   }
   Object.assign(roomModel, updateBody);
   await roomModel.save();

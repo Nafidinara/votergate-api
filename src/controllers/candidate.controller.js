@@ -3,10 +3,14 @@ const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
 const { candidateService } = require('../services');
+const Ipfs = require('../services/ipfs.service');
+const { IPFSProjectId, IPFSProjectSecret } = require('../config/config');
+
+const ipfsService = new Ipfs({ IPFSProjectId, IPFSProjectSecret, host: 'ipfs.infura.io', protocol: 'https', port: 5001 });
 
 const createCandidate = catchAsync(async (req, res) => {
-  if (req.file) {
-    req.body.image = req.file;
+  if (req.files.image) {
+    req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
   const candidate = await candidateService.createCandidate(req.body);
   res.status(httpStatus.CREATED).send(candidate);
@@ -39,8 +43,8 @@ const getCandidate = catchAsync(async (req, res) => {
 });
 
 const updateCandidate = catchAsync(async (req, res) => {
-  if (req.file) {
-    req.body.image = req.file.path;
+  if (req.files.image) {
+    req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
   const candidate = await candidateService.updateCandidateById(req.params.candidateId, req.body);
   res.send(candidate);

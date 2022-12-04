@@ -4,7 +4,7 @@ const { objectId } = require('./custom.validation');
 const createCandidate = {
   body: Joi.object().keys({
     room: Joi.custom(objectId).required(),
-    image: Joi.string().required(),
+    image: Joi.string(),
     names: Joi.array().required(),
     profile: Joi.string().required(),
     visi: Joi.string(),

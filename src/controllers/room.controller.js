@@ -43,8 +43,8 @@ const getRoom = catchAsync(async (req, res) => {
 });
 
 const updateRoom = catchAsync(async (req, res) => {
-  if (req.file) {
-    req.body.image = req.file.path;
+  if (req.files.thumbnail) {
+    req.body.thumbnail = await ipfsService.addFile({ content: req.files.thumbnail.data, path: req.files.thumbnail.name });
   }
   const room = await roomService.updateRoomById(req.params.roomId, req.body);
   res.send(room);

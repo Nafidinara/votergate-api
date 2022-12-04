@@ -11,7 +11,6 @@ const ApiError = require('../utils/ApiError');
  */
 const createCandidate = async (roomBody) => {
   const roomModel = await Candidate.create(roomBody);
-  roomModel._id = undefined;
   return Candidate.findOne({ _id: roomModel._id }).populate(['room']);
 };
 
@@ -51,16 +50,6 @@ const getCandidateById = async (id) => {
   return Candidate.findById(id).populate(['room']);
 };
 
-const getImageCandidate = async (roomId) => {
-  const roomModel = await getCandidateById(roomId);
-  if (!roomModel || !roomModel.image) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Candidate or image not found');
-  }
-
-  const dirname = path.resolve();
-  return path.join(dirname, roomModel.image);
-};
-
 /**
  * Update room by id
  * @param {ObjectId} roomId
@@ -68,19 +57,9 @@ const getImageCandidate = async (roomId) => {
  * @returns {Promise<Candidate>}
  */
 const updateCandidateById = async (roomId, updateBody) => {
-  const result = { ...updateBody };
   const roomModel = await Candidate.findOne({ _id: roomId });
   if (!roomModel) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Candidate not found');
-  }
-  if (result.image) {
-    const img = result.image;
-    result.image = img.path;
-    if (roomModel.image) {
-      unlink(roomModel.image, (err) => {
-        if (err) throw new ApiError(httpStatus.NOT_FOUND, 'File not found');
-      });
-    }
   }
   Object.assign(roomModel, updateBody);
   await roomModel.save();
@@ -108,5 +87,4 @@ module.exports = {
   updateCandidateById,
   deleteCandidateById,
   querySearch,
-  getImageCandidate,
 };
