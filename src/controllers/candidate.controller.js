@@ -2,7 +2,7 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { candidateService, IpfsService } = require('../services');
+const { candidateService, IpfsService, BlockchainService, roomService} = require('../services');
 const { IPFSProjectId, IPFSProjectSecret } = require('../config/config');
 
 const ipfsService = new IpfsService({
@@ -18,7 +18,14 @@ const createCandidate = catchAsync(async (req, res) => {
     req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
   const candidate = await candidateService.createCandidate(req.body);
-  res.status(httpStatus.CREATED).send(candidate);
+  const room = await roomService.getRoomById(req.body.room);
+  const blockchainService = new BlockchainService(room.contract);
+  const name = req.body.names.join(', ');
+  await blockchainService.addCandidate(name, candidate.id);
+  res.status(httpStatus.CREATED).send({
+    status: 'CREATED',
+    candidate,
+  });
 });
 
 const getCandidates = catchAsync(async (req, res) => {
