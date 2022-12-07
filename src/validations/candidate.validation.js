@@ -9,8 +9,6 @@ const createCandidate = {
     profile: Joi.string().required(),
     visi: Joi.string(),
     misi: Joi.string(),
-    startDatetime: Joi.date(),
-    endDatetime: Joi.date(),
   }),
 };
 
@@ -52,8 +50,6 @@ const updateCandidate = {
       profile: Joi.string(),
       visi: Joi.string(),
       misi: Joi.string(),
-      startDatetime: Joi.date(),
-      endDatetime: Joi.date(),
     })
     .min(1),
 };

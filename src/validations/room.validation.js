@@ -15,6 +15,8 @@ const createRoom = {
     room_key: Joi.string(),
     hashes: Joi.array(),
     participants: Joi.array(),
+    startDatetime: Joi.date(),
+    endDatetime: Joi.date(),
   }),
 };
 
@@ -64,6 +66,8 @@ const updateRoom = {
       room_key: Joi.string(),
       hashes: Joi.array(),
       participants: Joi.array(),
+      startDatetime: Joi.date(),
+      endDatetime: Joi.date(),
     })
     .min(1),
 };

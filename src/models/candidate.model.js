@@ -35,16 +35,6 @@ const candidateSchema = mongoose.Schema(
       required: false,
       trim: true,
     },
-    startDatetime: {
-      type: Date,
-      required: false,
-      trim: true,
-    },
-    endDatetime: {
-      type: Date,
-      required: false,
-      trim: true,
-    },
   },
   {
     timestamps: true,
