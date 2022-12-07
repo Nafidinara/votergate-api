@@ -25,6 +25,10 @@ const envVarsSchema = Joi.object()
     EMAIL_FROM: Joi.string().description('the from field in the emails sent by the app'),
     IPFS_PROJECT_ID: Joi.string().description('ipfs project id config'),
     IPFS_PROJECT_SECRET: Joi.string().description('ipfs project secret config'),
+    OFFICIAL_ADDRESS: Joi.string().description('official address of votergate'),
+    OFFICIAL_PK: Joi.string().description('official private key of votergate'),
+    RPC_URL: Joi.string().description('blockchain network url for votergate'),
+    LEDGER_URL: Joi.string().description('blockchain ledger url for votergate'),
   })
   .unknown();
 
@@ -64,4 +68,8 @@ module.exports = {
   },
   IPFSProjectId: envVars.IPFS_PROJECT_ID,
   IPFSProjectSecret: envVars.IPFS_PROJECT_SECRET,
+  OFFICIAL_ADDRESS: envVars.OFFICIAL_ADDRESS,
+  OFFICIAL_PK: envVars.OFFICIAL_PK,
+  RPC_URL: envVars.RPC_URL,
+  LEDGER_URL: envVars.LEDGER_URL,
 };

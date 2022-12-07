@@ -3,6 +3,7 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const docsRoute = require('./docs.route');
 const roomRoute = require('./room.route');
+const blockchainRoute = require('./blockchain.route');
 const candidateRoute = require('./candidate.route');
 const config = require('../../config/config');
 
@@ -28,6 +29,10 @@ const defaultRoutes = [
   {
     path: '/candidates',
     route: candidateRoute,
+  },
+  {
+    path: '/blockchain',
+    route: blockchainRoute,
   },
 ];
 

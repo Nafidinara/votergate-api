@@ -2,11 +2,16 @@ const httpStatus = require('http-status');
 const pick = require('../utils/pick');
 const ApiError = require('../utils/ApiError');
 const catchAsync = require('../utils/catchAsync');
-const { candidateService } = require('../services');
-const Ipfs = require('../services/ipfs.service');
+const { candidateService, IpfsService } = require('../services');
 const { IPFSProjectId, IPFSProjectSecret } = require('../config/config');
 
-const ipfsService = new Ipfs({ IPFSProjectId, IPFSProjectSecret, host: 'ipfs.infura.io', protocol: 'https', port: 5001 });
+const ipfsService = new IpfsService({
+  IPFSProjectId,
+  IPFSProjectSecret,
+  host: 'ipfs.infura.io',
+  protocol: 'https',
+  port: 5001,
+});
 
 const createCandidate = catchAsync(async (req, res) => {
   if (req.files.image) {

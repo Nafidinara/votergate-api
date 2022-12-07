@@ -3,4 +3,7 @@ module.exports.emailService = require('./email.service');
 module.exports.tokenService = require('./token.service');
 module.exports.userService = require('./user.service');
 module.exports.roomService = require('./room.service');
+module.exports.BlockchainService = require('./blockchain/blockchain.service');
+module.exports.IpfsService = require('./ipfs.service');
+module.exports.deployContractService = require('./blockchain/deploy');
 module.exports.candidateService = require('./candidate.service');
