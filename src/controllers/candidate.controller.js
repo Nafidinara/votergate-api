@@ -14,6 +14,7 @@ const ipfsService = new IpfsService({
 });
 
 const createCandidate = catchAsync(async (req, res) => {
+  console.log(req.body);
   if (req.files.image) {
     req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
