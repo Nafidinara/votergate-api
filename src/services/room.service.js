@@ -1,7 +1,7 @@
 const httpStatus = require('http-status');
 const path = require('path');
 const { unlink } = require('fs');
-const { Room } = require('../models');
+const { Room, Candidate} = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -47,7 +47,11 @@ const querySearch = async (filter, options) => {
  * @returns {Promise<Room>}
  */
 const getRoomById = async (id) => {
-  return Room.findById(id).populate(['user']);
+  const result = {};
+  const room = await Room.findById(id).populate(['user']);
+  const candidates = await Candidate.find({ room: room._id });
+  Object.assign(result, { room, candidates });
+  return result;
 };
 
 const getImageRoom = async (roomId) => {

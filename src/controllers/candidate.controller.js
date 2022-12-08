@@ -20,7 +20,7 @@ const createCandidate = catchAsync(async (req, res) => {
   const candidate = await candidateService.createCandidate(req.body);
   const room = await roomService.getRoomById(req.body.room);
   const blockchainService = new BlockchainService(room.contract);
-  const name = req.body.names.join(', ');
+  const name = JSON.parse(req.body.names).join(', ');
   await blockchainService.addCandidate(name, candidate.id);
   res.status(httpStatus.CREATED).send({
     status: 'CREATED',

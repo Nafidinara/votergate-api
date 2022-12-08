@@ -5,7 +5,7 @@ const createCandidate = {
   body: Joi.object().keys({
     room: Joi.custom(objectId).required(),
     image: Joi.string(),
-    names: Joi.array().required(),
+    names: Joi.any().required(),
     profile: Joi.string().required(),
     visi: Joi.string(),
     misi: Joi.string(),
@@ -46,7 +46,7 @@ const updateCandidate = {
     .keys({
       room: Joi.custom(objectId),
       image: Joi.string(),
-      names: Joi.array(),
+      names: Joi.any(),
       profile: Joi.string(),
       visi: Joi.string(),
       misi: Joi.string(),

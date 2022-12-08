@@ -78,6 +78,9 @@ const roomSchema = mongoose.Schema(
   }
 );
 
+
+
+
 // add plugin that converts mongoose to json
 roomSchema.plugin(toJSON);
 roomSchema.plugin(paginate);
