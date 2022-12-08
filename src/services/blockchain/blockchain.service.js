@@ -14,6 +14,7 @@ class Blockchain {
 
   async addCandidate(name, candidateId) {
     const data = this.votergateContract.methods.addCandidate(name, candidateId).encodeABI();
+
     const tx = {
       from: OFFICIAL_ADDRESS,
       to: this.contractAddress,

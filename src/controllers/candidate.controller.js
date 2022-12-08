@@ -17,11 +17,10 @@ const createCandidate = catchAsync(async (req, res) => {
   if (req.files.image) {
     req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
-  console.log(typeof req.body.names);
-  req.body.names = JSON.parse(req.body.names);
+  req.body.names = req.body.names.match(/\w+/g);
   const candidate = await candidateService.createCandidate(req.body);
   const room = await roomService.getRoomById(req.body.room);
-  const blockchainService = new BlockchainService(room.contract);
+  const blockchainService = new BlockchainService(room.room.contract);
   const name = req.body.names.join(', ');
   await blockchainService.addCandidate(name, candidate.id);
   res.status(httpStatus.CREATED).send({
