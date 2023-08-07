@@ -57,6 +57,12 @@ const vote = catchAsync(async (req, res) => {
     const { contractAddress } = req.body;
     const blockchainService = new BlockchainService(contractAddress);
     const rest = await blockchainService.vote(req.body.candidateId, req.body.voterId);
+    if (!rest) {
+      return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+        status: 'ERROR',
+        result: 'error when sending data to the blockchain',
+      });
+    }
     return res.status(httpStatus.OK).send({
       status: 'OK',
       result: {

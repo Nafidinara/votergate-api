@@ -55,7 +55,27 @@ class Blockchain {
 
     const signedTx = await this.account.signTransaction(tx);
 
-    return this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+    const hash = await new Promise((resolve) => {
+      this.web3.eth
+        .sendSignedTransaction(signedTx.rawTransaction)
+        // .on('transactionHash', function (hash) {
+        //   console.log('transactionHash');
+        // })
+        .on('receipt', function (receipt) {
+          console.log('get receipt');
+          resolve(receipt);
+        })
+        // .on('confirmation', function (confirmationNumber, receipt) {
+        //   console.log('confirmation');
+        //   resolve(receipt);
+        // })
+        .on('error', function (err) {
+          console.log('errorrrrrr', err.message);
+          resolve(null);
+        });
+    });
+
+    return hash;
   }
 
   async getCandidates() {
