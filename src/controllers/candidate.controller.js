@@ -56,7 +56,7 @@ const getCandidate = catchAsync(async (req, res) => {
 });
 
 const updateCandidate = catchAsync(async (req, res) => {
-  if (req.files.image) {
+  if (req.files?.image) {
     req.body.image = await ipfsService.addFile({ content: req.files.image.data, path: req.files.image.name });
   }
   const candidate = await candidateService.updateCandidateById(req.params.candidateId, req.body);

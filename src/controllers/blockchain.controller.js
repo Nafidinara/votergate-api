@@ -25,6 +25,7 @@ const addCandidate = catchAsync(async (req, res) => {
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      status: 'ERROR',
       result: e.message,
     });
   }
@@ -45,6 +46,7 @@ const setQuota = catchAsync(async (req, res) => {
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      status: 'ERROR',
       result: e.message,
     });
   }
@@ -65,6 +67,7 @@ const vote = catchAsync(async (req, res) => {
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      status: 'ERROR',
       result: e.message,
     });
   }
@@ -81,6 +84,7 @@ const getCandidates = catchAsync(async (req, res) => {
     });
   } catch (e) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      status: 'ERROR',
       result: e.message,
     });
   }
